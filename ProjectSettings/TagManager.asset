@@ -8,6 +8,7 @@ TagManager:
   - BadBall
   - Area
   - Enemy
+  - Bullet
   layers:
   - Default
   - TransparentFX
