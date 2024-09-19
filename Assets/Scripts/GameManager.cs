@@ -5,6 +5,9 @@ using UnityEngine;
 public class GameManager : MonoBehaviour
 {
     public Player player;
+
+    public float gameTime;
+    public float maxGameTime = 2 * 10f;
     public PoolManager pool;
     public static GameManager Instance;
 
@@ -27,6 +30,11 @@ public class GameManager : MonoBehaviour
 
     void Update()
     {
-        
+        gameTime += Time.deltaTime;
+
+        if (gameTime > maxGameTime)
+        {
+            gameTime = maxGameTime;
+        }
     }
 }

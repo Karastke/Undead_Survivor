@@ -4,22 +4,24 @@ using UnityEngine;
 
 public class Enemy : MonoBehaviour
 {
-    public float speed = 5.0f;
+    public float speed;
+    public float health;
+    public float maxHealth;
+    public RuntimeAnimatorController[] animCon;
     public Rigidbody2D target;
-    public float stopDistance = 1.5f;
     SpriteRenderer sprite;
+    Animator anim;
 
     Rigidbody2D rigid;
 
-    bool isLive = true;
+    bool isLive;
 
-
-    void Start()
+    void Awake()
     {
+        anim = GetComponent<Animator>();
         sprite = GetComponent<SpriteRenderer>();
         rigid = GetComponent<Rigidbody2D>();
     }
-
     void Update()
     {
         if (isLive)
@@ -67,5 +69,15 @@ public class Enemy : MonoBehaviour
     void OnEnable()
     {
         target = GameManager.Instance.player.GetComponent<Rigidbody2D>();
+        isLive = true;
+        health = maxHealth;
+    }
+
+    public void Init(SpawnData data)
+    {
+        anim.runtimeAnimatorController = animCon[data.spriteType];
+        speed = data.speed;
+        maxHealth = data.health;
+        health = data.health;
     }
 }
