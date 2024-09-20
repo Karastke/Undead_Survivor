@@ -5,11 +5,18 @@ using UnityEngine;
 public class GameManager : MonoBehaviour
 {
     public Player player;
-
-    public float gameTime;
-    public float maxGameTime = 2 * 10f;
     public PoolManager pool;
     public static GameManager Instance;
+
+[Header("# Game Time")]
+    public float gameTime;
+    public float maxGameTime = 2 * 10f;
+
+[Header("# Player Info")]
+    public int level;
+    public int kill;
+    public int exp;
+    public int[] nextExp = { 3, 5, 10, 100, 150, 210, 280, 360, 450, 600 };
 
     void Awake()
     {
@@ -22,11 +29,19 @@ public class GameManager : MonoBehaviour
             Destroy(gameObject);
         }
     }
-    void Start()
-    {
-        
-    }
 
+    public void GetExp()
+    {
+        exp++;
+
+        if (exp == nextExp[level])
+        {
+            level++;
+            exp = 0;
+        }
+
+
+    }
 
     void Update()
     {

@@ -88,7 +88,7 @@ public class Enemy : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other) 
     {
-        if (!other.CompareTag("Bullet"))
+        if (!other.CompareTag("Bullet") || !isLive)
         {
             return;
         }
@@ -108,6 +108,8 @@ public class Enemy : MonoBehaviour
             rigid.simulated = false;
             sprite.sortingOrder = 1;
             anim.SetBool("Dead", true);
+            GameManager.Instance.kill++;
+            GameManager.Instance.GetExp();
         }
 
         
