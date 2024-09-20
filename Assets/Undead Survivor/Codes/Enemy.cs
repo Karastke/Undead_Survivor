@@ -13,6 +13,8 @@ public class Enemy : MonoBehaviour
     Animator anim;
 
     Rigidbody2D rigid;
+    Collider2D coll;
+    WaitForFixedUpdate wait;
 
     bool isLive;
 
@@ -21,17 +23,16 @@ public class Enemy : MonoBehaviour
         anim = GetComponent<Animator>();
         sprite = GetComponent<SpriteRenderer>();
         rigid = GetComponent<Rigidbody2D>();
+        wait = new WaitForFixedUpdate();
+        coll = GetComponent<Collider2D>();
     }
-    void Update()
+    void FixedUpdate()
     {
-        if (isLive)
-        {
-            Chase();
-        }
-        else
+        if (!isLive || anim.GetCurrentAnimatorStateInfo(0).IsName("Hit"))
         {
             return;
         }
+            Chase();
 
     }
 
@@ -71,6 +72,10 @@ public class Enemy : MonoBehaviour
         target = GameManager.Instance.player.GetComponent<Rigidbody2D>();
         isLive = true;
         health = maxHealth;
+        coll.enabled = true;
+        rigid.simulated = true;
+        sprite.sortingOrder = 2;
+        anim.SetBool("Dead", false);
     }
 
     public void Init(SpawnData data)
@@ -88,17 +93,32 @@ public class Enemy : MonoBehaviour
             return;
         }
         health -= other.GetComponent<Bullet>().damage;
+        StartCoroutine(KnockBack());
 
         if (health > 0)
         {
+            anim.SetTrigger("Hit");
             //피격
         }
         else
         {
             //죽음
-            Dead();
+            isLive = false;
+            coll.enabled = false;
+            rigid.simulated = false;
+            sprite.sortingOrder = 1;
+            anim.SetBool("Dead", true);
         }
 
+        
+    }
+
+    IEnumerator KnockBack()
+    {
+        yield return wait; // 1프레임 쉬기
+        Vector3 playerPos = GameManager.Instance.player.transform.position;
+        Vector3 dirVec = transform.position - playerPos;
+        rigid.AddForce(dirVec.normalized * 3, ForceMode2D.Impulse);
         
     }
 
