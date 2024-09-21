@@ -73,6 +73,8 @@
     <Compile Include="Assets\버전2\Falling2.cs" />
     <Compile Include="Assets\Scripts\PlayerMovement.cs" />
     <Compile Include="Assets\Scripts\Ball.cs" />
+    <Compile Include="Assets\Undead Survivor\Codes\Follow.cs" />
+    <Compile Include="Assets\Undead Survivor\Codes\HUD.cs" />
     <Compile Include="Assets\Scripts\Falling.cs" />
     <Compile Include="Assets\Undead Survivor\Codes\Scanner.cs" />
     <Compile Include="Assets\Undead Survivor\Codes\PoolManager.cs" />
