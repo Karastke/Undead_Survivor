@@ -26,11 +26,6 @@ public class Spawner : MonoBehaviour
             Spawn();
 
         }
-
-        if (Input.GetButtonDown("Jump"))
-        {
-
-        }
     }
 
     void Spawn()
