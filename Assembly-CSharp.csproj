@@ -64,6 +64,7 @@
     <Analyzer Include="D:\Unity\2022.3.27f1\Editor\Data\Tools\Unity.SourceGenerators\Unity.Properties.SourceGenerator.dll" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets\Undead Survivor\Codes\LevelUp.cs" />
     <Compile Include="Assets\Undead Survivor\Codes\Spawner.cs" />
     <Compile Include="Assets\Undead Survivor\Codes\Gear.cs" />
     <Compile Include="Assets\Undead Survivor\Codes\Bullet.cs" />

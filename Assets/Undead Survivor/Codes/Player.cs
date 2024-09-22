@@ -31,6 +31,8 @@ public class Player : MonoBehaviour
 
     void FixedUpdate()
     {
+        if (!GameManager.Instance.isLive)
+            return;
         Vector2 nextVec = inputVec * speed * Time.fixedDeltaTime;
         rigid.MovePosition(rigid.position + nextVec);
     }
@@ -42,41 +44,14 @@ public class Player : MonoBehaviour
 
     void LateUpdate()
     {
+                if (!GameManager.Instance.isLive)
+            return;
         anim.SetFloat("Speed", inputVec.magnitude);
 
         if (inputVec.x != 0)
         {
             spriter.flipX = inputVec.x < 0 ;
         }
-    }
-
-    // void Update()
-    // {
-    //     KeepPlayerInBounds();
-    // }
-
-    // void KeepPlayerInBounds()
-    // {
-    //     Vector3 viewPos = _mainCamera.WorldToViewportPoint(transform.position);
-
-    //     viewPos.x = Mathf.Clamp(viewPos.x, 0.0f, 1.0f);
-    //     viewPos.y = Mathf.Clamp(viewPos.y, 0.0f, 1.0f);
-
-    //     transform.position = _mainCamera.ViewportToWorldPoint(viewPos);
-    // }
-
-    void OnTriggerEnter2D(Collider2D other)
-    {
-        if (other.gameObject.CompareTag("BadBall"))
-        {
-            Die();
-        }
-    }
-
-    void Die()
-    {
-        Debug.Log("Game Over");
-        Destroy(gameObject);
     }
 
 }

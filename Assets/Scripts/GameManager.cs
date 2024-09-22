@@ -4,11 +4,11 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
-    public Player player;
-    public PoolManager pool;
+
     public static GameManager Instance;
 
-[Header("# Game Time")]
+    [Header("# Game Control")]
+    public bool isLive = true;
     public float gameTime;
     public float maxGameTime = 2 * 10f;
 
@@ -19,6 +19,11 @@ public class GameManager : MonoBehaviour
     public int kill;
     public int exp;
     public int[] nextExp = { 3, 5, 10, 100, 150, 210, 280, 360, 450, 600 };
+
+    [Header("# Game Object")]
+    public Player player;
+    public PoolManager pool;
+    public LevelUp uiLevelUp;
 
 
     void Awake()
@@ -38,6 +43,8 @@ public class GameManager : MonoBehaviour
     void Start()
     {
         health = maxHealth;
+
+        uiLevelUp.Select(0);
     }
 
     public void GetExp()
@@ -48,6 +55,7 @@ public class GameManager : MonoBehaviour
         {
             level++;
             exp = 0;
+            uiLevelUp.Show();
         }
 
 
@@ -55,11 +63,27 @@ public class GameManager : MonoBehaviour
 
     void Update()
     {
+        if (!isLive)
+        {
+            return;
+        }
         gameTime += Time.deltaTime;
 
         if (gameTime > maxGameTime)
         {
             gameTime = maxGameTime;
         }
+    }
+
+    public void Stop()
+    {
+        isLive = false;
+        Time.timeScale = 0;
+    }
+
+    public void Resume()
+    {
+        isLive = true;
+        Time.timeScale = 1;
     }
 }

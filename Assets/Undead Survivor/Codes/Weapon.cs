@@ -36,6 +36,8 @@ public class Weapon : MonoBehaviour
 
     void Update()
     {
+            if (!GameManager.Instance.isLive)
+            return;
           switch(id)
         {
             case 0:
@@ -50,11 +52,6 @@ public class Weapon : MonoBehaviour
                     Fire();
                 }
                 break;
-        }
-
-        if (Input.GetButtonDown("Jump"))
-        {
-            LevelUp(10, 1);
         }
     }
 
