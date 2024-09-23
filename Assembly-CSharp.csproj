@@ -74,6 +74,7 @@
     <Compile Include="Assets\Scripts\Reposition.cs" />
     <Compile Include="Assets\버전2\Falling2.cs" />
     <Compile Include="Assets\Scripts\PlayerMovement.cs" />
+    <Compile Include="Assets\Undead Survivor\Codes\Result.cs" />
     <Compile Include="Assets\Scripts\Ball.cs" />
     <Compile Include="Assets\Undead Survivor\Codes\Follow.cs" />
     <Compile Include="Assets\Undead Survivor\Codes\HUD.cs" />
